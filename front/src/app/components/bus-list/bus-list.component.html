@@ -1,0 +1,17 @@
+<h2>Listado de Buses</h2>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Placa</th>
+    <th>Modelo</th>
+    <th>Estado</th>
+  </tr>
+
+  <tr *ngFor="let bus of buses">
+    <td>{{ bus.id_bus }}</td>
+    <td>{{ bus.placa }}</td>
+    <td>{{ bus.modelo }}</td>
+    <td>{{ bus.estado }}</td>
+  </tr>
+</table>

@@ -1,0 +1,8 @@
+<h2>Listado de Vendedores</h2>
+
+<ul>
+  <li *ngFor="let v of vendedores">
+    {{ v.id_vendedor }} - {{ v.nombres }} {{ v.apellidos }} ({{ v.estado }})
+  </li>
+</ul>
+

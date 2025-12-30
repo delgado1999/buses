@@ -1,0 +1,23 @@
+<h2>Detalle de Reserva</h2>
+
+<table border="1" cellpadding="5">
+  <thead>
+    <tr>
+      <th>ID Detalle</th>
+      <th>ID Reserva</th>
+      <th>N° Asiento</th>
+      <th>Precio</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let d of detalles">
+      <td>{{ d.id_detalle }}</td>
+      <td>{{ d.id_reserva }}</td>
+      <td>{{ d.nro_asiento }}</td>
+      <td>S/ {{ d.precio }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
