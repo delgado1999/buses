@@ -1,0 +1,23 @@
+<form [formGroup]="ciudadForm" (ngSubmit)="onSubmit()">
+
+  <label>Nombre de la Ciudad</label>
+  <input type="text" formControlName="nombre" placeholder="Ej: Lima">
+
+  <label>Estado</label>
+  <select formControlName="estado">
+    <option value="ACTIVO">ACTIVO</option>
+    <option value="INACTIVO">INACTIVO</option>
+  </select>
+
+  <button type="submit" class="guardar-btn">
+    {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+  </button>
+
+  <button type="button" routerLink="/ciudades" class="cancelar-btn">
+    Cancelar
+  </button>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+</form>
+

@@ -1,5 +1,5 @@
 export interface Bus {
-  id_bus?: number;
+  id_bus: number;
   placa: string;
   modelo?: string;
   nro_asientos: number;

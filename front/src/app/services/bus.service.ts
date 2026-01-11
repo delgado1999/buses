@@ -20,6 +20,10 @@ export class BusService {
   obtener(id: number): Observable<BusResponse> {
     return this.http.get<BusResponse>(`${this.apiUrl}/${id}`);
   }
+obtenerAsientos(id: number): Observable<{ success: boolean, totalAsientos: number, ocupados: number[] }> {
+  return this.http.get<{ success: boolean, totalAsientos: number, ocupados: number[] }>(`${this.apiUrl}/${id}/asientos`);
+}
+
 
   crear(bus: Bus): Observable<BusResponse> {
     return this.http.post<BusResponse>(this.apiUrl, bus);

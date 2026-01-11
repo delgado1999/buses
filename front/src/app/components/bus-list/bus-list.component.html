@@ -1,17 +1,44 @@
 <h2>Listado de Buses</h2>
 
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Placa</th>
-    <th>Modelo</th>
-    <th>Estado</th>
-  </tr>
+<!-- BOTÓN NUEVO -->
+<button routerLink="/buses/nuevo" class="btn-nuevo">
+  Nuevo
+</button>
 
-  <tr *ngFor="let bus of buses">
-    <td>{{ bus.id_bus }}</td>
-    <td>{{ bus.placa }}</td>
-    <td>{{ bus.modelo }}</td>
-    <td>{{ bus.estado }}</td>
-  </tr>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Placa</th>
+      <th>Modelo</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let bus of buses">
+      <td>{{ bus.id_bus }}</td>
+      <td>{{ bus.placa }}</td>
+      <td>{{ bus.modelo }}</td>
+      <td>{{ bus.estado }}</td>
+
+      <!-- ACCIONES -->
+      <td class="acciones">
+        <button
+          class="btn-editar"
+          [routerLink]="['/buses/editar', bus.id_bus]">
+          ✏️
+        </button>
+
+        <button
+          class="btn-eliminar"
+          (click)="eliminar(bus.id_bus!)">
+          🗑️
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+

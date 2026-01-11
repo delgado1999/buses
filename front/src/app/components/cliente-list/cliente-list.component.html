@@ -1,16 +1,30 @@
 <h2>Listado de Clientes</h2>
 
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Nombres</th>
-    <th>DNI</th>
-  </tr>
+<a routerLink="/clientes/nuevo" class="btn-nuevo">➕ Nuevo Cliente</a>
 
-  <tr *ngFor="let c of clientes">
-    <td>{{ c.id_cliente }}</td>
-    <td>{{ c.nombres }}</td>
-    <td>{{ c.dni }}</td>
-  </tr>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombres</th>
+      <th>DNI</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let c of clientes">
+      <td>{{ c.id_cliente }}</td>
+      <td>{{ c.nombres }}</td>
+      <td>{{ c.dni }}</td>
+      <td>
+        <a [routerLink]="['/clientes/editar', c.id_cliente]">✏️ Editar</a>
+        |
+        <button (click)="eliminar(c.id_cliente)">🗑 Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+
 

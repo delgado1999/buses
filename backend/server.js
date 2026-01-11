@@ -13,12 +13,15 @@ const busRoutes = require('./routes/busRoutes');
 const reservaRoutes = require('./routes/reservaRoutes');
 const detalleReservaRoutes = require('./routes/detalleReservaRoutes');
 
+
 app.use('/api/ciudades', ciudadRoutes);
 app.use('/api/clientes', clienteRoutes);
 app.use('/api/vendedores', vendedorRoutes);
 app.use('/api/buses', busRoutes);
 app.use('/api/reservas', reservaRoutes);
 app.use('/api/detalles-reserva', detalleReservaRoutes);
+app.use('/api/auth', require('./routes/auth.routes'));
+
 
 
 const PORT = process.env.PORT || 3000;

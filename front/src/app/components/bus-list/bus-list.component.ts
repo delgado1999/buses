@@ -7,7 +7,7 @@ import { Bus } from '../../models/bus.interface';
 @Component({
   selector: 'app-bus-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './bus-list.component.html',
   styleUrl: './bus-list.component.css'
 })
@@ -23,7 +23,22 @@ export class BusListComponent implements OnInit {
 
   listar() {
     this.busService.listar().subscribe(resp => {
-      this.buses = resp.data as Bus[];
+      if (resp.success && Array.isArray(resp.data)) {
+        this.buses = resp.data;
+      } else {
+        this.buses = [];
+      }
+    });
+  }
+
+  eliminar(id: number) {
+    if (!confirm('¿Está seguro de eliminar este bus?')) {
+      return;
+    }
+
+    this.busService.eliminar(id).subscribe({
+      next: () => this.listar(),
+      error: () => alert('Error al eliminar el bus')
     });
   }
 }

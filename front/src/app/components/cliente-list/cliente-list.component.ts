@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.interface';
 
 @Component({
   selector: 'app-cliente-list',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './cliente-list.component.html'
+  imports: [CommonModule, RouterLink],
+  templateUrl: './cliente-list.component.html',
+  styleUrl: './cliente-list.component.css'
 })
 export class ClienteListComponent implements OnInit {
 
@@ -23,6 +25,14 @@ export class ClienteListComponent implements OnInit {
     this.clienteService.listar().subscribe(resp => {
       this.clientes = resp.data as Cliente[];
     });
+  }
+
+  eliminar(id: number) {
+    if (confirm('¿Deseas eliminar este cliente?')) {
+      this.clienteService.eliminar(id).subscribe(() => {
+        this.listar();
+      });
+    }
   }
 }
 

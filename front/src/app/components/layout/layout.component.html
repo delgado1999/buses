@@ -1,0 +1,46 @@
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>Sistema de Reservas</h2>
+    </div>
+
+    <ul class="menu">
+
+      <!-- Inicio -->
+      <li class="menu-title">Inicio</li>
+      <li><a routerLink="/vendedores">Dashboard</a></li>
+
+      <!-- Módulos -->
+      <li class="menu-title">Módulos</li>
+      <li *ngIf="authService.esAdmin()"><a routerLink="/vendedores">Vendedores</a></li>
+      <li><a routerLink="/clientes">Clientes</a></li>
+      <li><a routerLink="/reservas">Reservas</a></li>
+      <li *ngIf="authService.esAdmin()"><a routerLink="/buses">Buses</a></li>
+      <li *ngIf="authService.esAdmin()"><a routerLink="/ciudades">Ciudades</a></li>
+
+      <!-- Reportes -->
+      <li class="menu-title">Reportes</li>
+      <li><a routerLink="/reportes">Reportes</a></li>
+
+      <!-- Logout -->
+      <li><a (click)="logout()" class="logout">Cerrar Sesión</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="header">
+      <h1>Sistema de Reservas de Buses</h1>
+      <div class="user">
+        <span>{{ authService.obtenerUsuario()?.email }}</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</div>

@@ -1,18 +1,25 @@
 <h2>Listado de Reservas</h2>
 
-<table border="1" cellpadding="5" cellspacing="0">
+<!-- BOTÓN NUEVA RESERVA -->
+<button routerLink="/reservas/nuevo" class="btn-nuevo">
+  Nuevo
+</button>
+
+
+<table>
   <thead>
     <tr>
       <th>ID</th>
       <th>Código</th>
       <th>Fecha</th>
-      <th>ID Cliente</th>
-      <th>ID Vendedor</th>
-      <th>ID Bus</th>
+      <th>Cliente</th>
+      <th>Vendedor</th>
+      <th>Bus</th>
       <th>Ciudad Origen</th>
       <th>Ciudad Destino</th>
       <th>Monto</th>
       <th>Estado</th>
+      <th>Acciones</th>
     </tr>
   </thead>
 
@@ -20,15 +27,27 @@
     <tr *ngFor="let r of reservas">
       <td>{{ r.id_reserva }}</td>
       <td>{{ r.codigo_reserva }}</td>
-      <td>{{ r.fecha_reserva }}</td>
-      <td>{{ r.id_cliente }}</td>
-      <td>{{ r.id_vendedor }}</td>
-      <td>{{ r.id_bus }}</td>
-      <td>{{ r.id_ciudad_origen }}</td>
-      <td>{{ r.id_ciudad_destino }}</td>
+      <td>{{ r.fecha_reserva | date:'short' }}</td>
+      <td>{{ r.cliente }}</td>
+      <td>{{ r.vendedor }}</td>
+      <td>{{ r.bus }}</td>
+      <td>{{ r.ciudad_origen }}</td>
+      <td>{{ r.ciudad_destino }}</td>
       <td>S/ {{ r.monto_total }}</td>
       <td>{{ r.estado }}</td>
+
+      <!-- ACCIONES -->
+      <td class="acciones">
+        <button class="btn-editar" [routerLink]="['/reservas/editar', r.id_reserva]">
+          ✏️
+        </button>
+
+        <button class="btn-eliminar" (click)="eliminar(r.id_reserva!)">
+          🗑️
+        </button>
+      </td>
+
+
     </tr>
   </tbody>
 </table>
-

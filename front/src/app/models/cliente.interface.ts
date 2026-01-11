@@ -1,5 +1,5 @@
 export interface Cliente {
-  id_cliente?: number;
+  id_cliente: number;          
   nombres: string;
   apellidos: string;
   dni: string;
@@ -7,6 +7,7 @@ export interface Cliente {
   correo?: string | null;
   id_ciudad?: number | null;
 }
+
 
 export interface ClienteResponse {
   success: boolean;

@@ -1,7 +1,7 @@
 export interface Ciudad {
-  id_ciudad?: number;
+  id_ciudad: number;
   nombre: string;
-  estado?: string;
+  estado: string;
 }
 
 export interface CiudadResponse {

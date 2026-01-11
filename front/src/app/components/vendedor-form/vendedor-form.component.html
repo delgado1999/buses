@@ -1,0 +1,32 @@
+<form [formGroup]="vendedorForm" (ngSubmit)="onSubmit()">
+
+  <label>Nombres</label>
+  <input type="text" formControlName="nombres">
+
+  <label>Apellidos</label>
+  <input type="text" formControlName="apellidos">
+
+  <label>Usuario</label>
+  <input type="text" formControlName="usuario">
+
+  <label>Password</label>
+  <input type="password" formControlName="password"
+         placeholder="Solo si desea cambiarla">
+
+  <label>Estado</label>
+  <select formControlName="estado">
+    <option value="ACTIVO">ACTIVO</option>
+    <option value="INACTIVO">INACTIVO</option>
+  </select>
+
+  <button type="submit" class="guardar-btn">
+    {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+  </button>
+
+  <button type="button" routerLink="/vendedores" class="cancelar-btn">
+    Cancelar
+  </button>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+</form>

@@ -1,8 +1,5 @@
 const db = require('../config/database');
 
-// ===============================================
-// OBTENER TODOS LOS BUSES
-// ===============================================
 const obtenerBuses = async (req, res) => {
     try {
         const [buses] = await db.query(
@@ -24,9 +21,6 @@ const obtenerBuses = async (req, res) => {
     }
 };
 
-// ===============================================
-// OBTENER BUS POR ID
-// ===============================================
 const obtenerBusPorId = async (req, res) => {
     try {
         const { id } = req.params;
@@ -57,9 +51,6 @@ const obtenerBusPorId = async (req, res) => {
     }
 };
 
-// ===============================================
-// CREAR BUS
-// ===============================================
 const crearBus = async (req, res) => {
     try {
         const { placa, modelo, nro_asientos, estado } = req.body;
@@ -107,10 +98,6 @@ const crearBus = async (req, res) => {
         });
     }
 };
-
-// ===============================================
-// ACTUALIZAR BUS
-// ===============================================
 const actualizarBus = async (req, res) => {
     try {
         const { id } = req.params;
@@ -172,9 +159,6 @@ const actualizarBus = async (req, res) => {
     }
 };
 
-// ===============================================
-// ELIMINAR BUS
-// ===============================================
 const eliminarBus = async (req, res) => {
     try {
         const { id } = req.params;
@@ -206,11 +190,59 @@ const eliminarBus = async (req, res) => {
         });
     }
 };
+const obtenerAsientosBus = async (req, res) => {
+    try {
+        const { id } = req.params; // id del bus
+
+        // 1. Obtener el total de asientos del bus
+        const [bus] = await db.query(
+            'SELECT nro_asientos FROM bus WHERE id_bus = ?',
+            [id]
+        );
+
+        if (bus.length === 0) {
+            return res.status(404).json({
+                success: false,
+                mensaje: 'Bus no encontrado'
+            });
+        }
+
+        const totalAsientos = bus[0].nro_asientos;
+
+        // 2. Obtener los asientos ya reservados (CONFIRMADA o PENDIENTE)
+        const [ocupados] = await db.query(
+            `SELECT dr.nro_asiento
+             FROM detalle_reserva dr
+             JOIN reserva r ON dr.id_reserva = r.id_reserva
+             WHERE r.id_bus = ? AND r.estado IN ('CONFIRMADA', 'PENDIENTE')`,
+            [id]
+        );
+
+        // Convertir a array de números
+        const asientosOcupados = ocupados.map(a => a.nro_asiento);
+
+        // 3. Responder
+        res.json({
+            success: true,
+            totalAsientos,
+            ocupados: asientosOcupados
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            mensaje: 'Error al obtener asientos del bus',
+            error: error.message
+        });
+    }
+};
+
 
 module.exports = {
     obtenerBuses,
     obtenerBusPorId,
     crearBus,
     actualizarBus,
-    eliminarBus
+    eliminarBus,
+    obtenerAsientosBus
 };

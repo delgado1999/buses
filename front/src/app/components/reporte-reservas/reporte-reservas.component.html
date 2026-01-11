@@ -1,0 +1,65 @@
+<div class="container">
+  <h2>Historial de Reservas</h2>
+
+  <!-- FILTROS -->
+  <div class="filtros">
+    <label>
+      Cliente:
+      <select [(ngModel)]="filtros.clienteId">
+        <option value="">Todos</option>
+        <option *ngFor="let c of clientes" [value]="c.id_cliente">
+          {{ c.nombres }} {{ c.apellidos }}
+        </option>
+      </select>
+    </label>
+
+    <label>
+      Estado:
+      <select [(ngModel)]="filtros.estado">
+        <option value="">Todos</option>
+        <option value="PENDIENTE">PENDIENTE</option>
+        <option value="CONFIRMADA">CONFIRMADA</option>
+        <option value="CANCELADA">CANCELADA</option>
+      </select>
+    </label>
+
+    <label>
+      Fecha Inicio:
+      <input type="date" [(ngModel)]="filtros.fechaInicio">
+    </label>
+
+    <label>
+      Fecha Fin:
+      <input type="date" [(ngModel)]="filtros.fechaFin">
+    </label>
+
+    <button (click)="cargarReporte()">Filtrar</button>
+    <button (click)="limpiarFiltros()">Limpiar</button>
+  </div>
+
+  <!-- EXPORTACIÓN -->
+  <div class="export">
+    <button class="export" (click)="exportarExcel()">Exportar Excel</button>
+    <button class="export" (click)="exportarPDF()">Exportar PDF</button>
+  </div>
+
+  <!-- TARJETAS DE RESERVAS -->
+  <div class="reserva-cards">
+    <div class="card" *ngFor="let r of reservas">
+      <h3>{{ r.codigo_reserva }} - {{ r.estado }}</h3>
+      <p><strong>Cliente:</strong> {{ r.cliente_nombres }} {{ r.cliente_apellidos }}</p>
+      <p><strong>Vendedor:</strong> {{ r.vendedor_nombres }} {{ r.vendedor_apellidos }}</p>
+      <p><strong>Bus:</strong> {{ r.bus_placa }} - {{ r.bus_modelo }}</p>
+      <p><strong>Ruta:</strong> {{ r.ciudad_origen }} → {{ r.ciudad_destino }}</p>
+      <p><strong>Fecha:</strong> {{ r.fecha_reserva | date:'short' }}</p>
+      <p><strong>Monto:</strong> {{ r.monto_total | currency:'USD' }}</p>
+      <p><strong>Asientos:</strong>
+        <span *ngFor="let a of r.asientos">
+          {{ a.nro_asiento }}<span *ngIf="!isLast(a, r.asientos)">, </span>
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+
+

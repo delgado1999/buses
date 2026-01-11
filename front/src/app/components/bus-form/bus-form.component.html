@@ -1,0 +1,29 @@
+<form [formGroup]="busForm" (ngSubmit)="onSubmit()">
+
+  <label>Placa</label>
+  <input type="text" formControlName="placa" placeholder="ABC-123">
+
+  <label>Modelo</label>
+  <input type="text" formControlName="modelo">
+
+  <label>N° de Asientos</label>
+  <input type="number" formControlName="nro_asientos">
+
+  <label>Estado</label>
+  <select formControlName="estado">
+    <option value="ACTIVO">ACTIVO</option>
+    <option value="INACTIVO">INACTIVO</option>
+  </select>
+
+  <button type="submit" class="guardar-btn">
+    {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+  </button>
+
+  <button type="button" routerLink="/buses" class="cancelar-btn">
+    Cancelar
+  </button>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+</form>
+

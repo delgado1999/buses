@@ -1,0 +1,31 @@
+<form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+
+  <label>Nombres</label>
+  <input type="text" formControlName="nombres">
+
+  <label>Apellidos</label>
+  <input type="text" formControlName="apellidos">
+
+  <label>DNI</label>
+  <input type="text" formControlName="dni">
+
+  <label>Teléfono</label>
+  <input type="text" formControlName="telefono">
+
+  <label>Correo</label>
+  <input type="text" formControlName="correo">
+
+  <label>Ciudad</label>
+  <input type="text" formControlName="id_ciudad">
+
+  <button type="submit" class="guardar-btn">
+    {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+  </button>
+
+  <button type="button" routerLink="/clientes" class="cancelar-btn">
+    Cancelar
+  </button>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+</form>

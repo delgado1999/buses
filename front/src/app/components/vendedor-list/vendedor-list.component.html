@@ -1,8 +1,46 @@
 <h2>Listado de Vendedores</h2>
 
-<ul>
-  <li *ngFor="let v of vendedores">
-    {{ v.id_vendedor }} - {{ v.nombres }} {{ v.apellidos }} ({{ v.estado }})
-  </li>
-</ul>
+<!-- BOTÓN NUEVO -->
+<a routerLink="/vendedores/nuevo" class="btn-nuevo">
+  Nuevo
+</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let v of vendedores">
+      <td>{{ v.id_vendedor }}</td>
+      <td>{{ v.nombres }}</td>
+      <td>{{ v.apellidos }}</td>
+      <td>{{ v.estado }}</td>
+
+      <!-- ACCIONES -->
+      <td class="acciones">
+        <button
+          class="btn-editar"
+          [routerLink]="['/vendedores/editar', v.id_vendedor]">
+          ✏️
+        </button>
+
+        <button
+          class="btn-eliminar"
+          (click)="eliminar(v.id_vendedor!)">
+          🗑️
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
 

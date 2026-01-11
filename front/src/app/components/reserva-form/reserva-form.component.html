@@ -1,0 +1,110 @@
+<h2>{{ isEditMode ? 'Editar Reserva' : 'Nueva Reserva' }}</h2>
+
+<form [formGroup]="reservaForm" (ngSubmit)="onSubmit()">
+
+  <label>Código Reserva</label>
+  <input type="text" formControlName="codigo_reserva">
+
+  <label>Fecha Reserva</label>
+  <input type="datetime-local" formControlName="fecha_reserva">
+
+  <label>Cliente</label>
+  <select formControlName="id_cliente">
+    <option value="">-- Seleccione Cliente --</option>
+    <option *ngFor="let c of clientes" [value]="c.id_cliente">
+      {{ c.nombres }} {{ c.apellidos }}
+    </option>
+  </select>
+
+  <label>Vendedor</label>
+  <select formControlName="id_vendedor">
+    <option value="">-- Seleccione Vendedor --</option>
+    <option *ngFor="let v of vendedores" [value]="v.id_vendedor">
+      {{ v.nombres }} {{ v.apellidos }}
+    </option>
+  </select>
+
+  <label>Bus</label>
+  <select formControlName="id_bus" (change)="verAsientos()">
+    <option value="">-- Seleccione Bus --</option>
+    <option *ngFor="let b of buses" [value]="b.id_bus">
+      {{ b.placa }} - {{ b.modelo }}
+    </option>
+  </select>
+
+  <label>Ciudad Origen</label>
+  <select formControlName="id_ciudad_origen">
+    <option value="">-- Seleccione Ciudad Origen --</option>
+    <option *ngFor="let co of ciudades" [value]="co.id_ciudad">
+      {{ co.nombre }}
+    </option>
+  </select>
+
+  <label>Ciudad Destino</label>
+  <select formControlName="id_ciudad_destino">
+    <option value="">-- Seleccione Ciudad Destino --</option>
+    <option *ngFor="let cd of ciudades" [value]="cd.id_ciudad">
+      {{ cd.nombre }}
+    </option>
+  </select>
+  <p class="error" *ngIf="
+     reservaForm.value.id_ciudad_origen === reservaForm.value.id_ciudad_destino &&
+     reservaForm.value.id_ciudad_origen
+   ">
+    La ciudad de origen y destino no pueden ser iguales
+  </p>
+
+  <label>Monto Total</label>
+  <input type="number" step="0.01" formControlName="monto_total">
+
+  <label>Estado</label>
+  <select formControlName="estado">
+    <option value="PENDIENTE">PENDIENTE</option>
+    <option value="CONFIRMADA">CONFIRMADA</option>
+    <option value="CANCELADA">CANCELADA</option>
+  </select>
+
+  <button type="submit">
+    {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+  </button>
+
+  <button type="button" routerLink="/reservas">
+    Cancelar
+  </button>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+</form>
+
+<!-- Modal de selección de asientos -->
+<div *ngIf="mostrarModal" class="modal">
+  <div class="modal-content">
+
+    <h3>🚌 Seleccionar Asientos</h3>
+
+    <div class="bus-body">
+
+      <!-- Conductor -->
+      <div class="driver">🧑‍✈️ Conductor</div>
+
+      <!-- Asientos grid -->
+      <div class="asientos-grid">
+        <div *ngFor="let a of asientos" class="seat"
+          [class.disponible]="!ocupados.includes(a) && !asientosSeleccionados.includes(a)"
+          [class.ocupado]="ocupados.includes(a)" [class.seleccionado]="asientosSeleccionados.includes(a)"
+          (click)="!ocupados.includes(a) && seleccionarAsiento(a)">
+          {{ a }}
+        </div>
+      </div>
+
+      <!-- Leyenda -->
+      <div class="leyenda">
+        <span class="box disponible"></span> Disponible
+        <span class="box ocupado"></span> Ocupado
+        <span class="box seleccionado"></span> Seleccionado
+      </div>
+
+    </div>
+
+    <button (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>

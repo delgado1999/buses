@@ -1,0 +1,151 @@
+/* ==========================
+   CONTENEDOR GENERAL
+========================== */
+.container {
+  max-width: 1300px;
+  margin: 30px auto;
+  padding: 30px 25px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #f4f6f9;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* ==========================
+   ENCABEZADO
+========================== */
+h2 {
+  text-align: center;
+  color: #1d4ed8;
+  margin-bottom: 30px;
+  font-size: 32px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* ==========================
+   FILTROS
+========================== */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.filtros label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.filtros input,
+.filtros select {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+.filtros input:focus,
+.filtros select:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 8px rgba(29,78,216,0.25);
+  outline: none;
+}
+
+.filtros button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+
+.filtros button:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   BOTONES DE EXPORTACIÓN
+========================== */
+.export {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+button.export {
+  background-color: #22c55e;
+  color: #fff;
+}
+
+button.export:hover {
+  background-color: #16a34a;
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   TARJETAS DE RESERVAS
+========================== */
+.reserva-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
+}
+
+.card h3 {
+  color: #1d4ed8;
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.card p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #374151;
+}
+
+.card p strong {
+  color: #1e293b;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 992px) {
+  .filtros {
+    flex-direction: column;
+  }
+  .filtros label {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .reserva-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
